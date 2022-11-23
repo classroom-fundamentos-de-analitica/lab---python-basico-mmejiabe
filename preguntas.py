@@ -21,7 +21,13 @@ def pregunta_01():
     214
 
     """
-    return 214
+    import pandas as pd
+    datos = pd.read_csv ("data.csv",sep="\t", header=None)
+    Resultado = datos[1].sum()
+
+    return Resultado
+
+
 
 
 def pregunta_02():
@@ -125,6 +131,11 @@ def pregunta_06():
     ]
 
     """
+    datos = [ line.split(",") for libe in data]
+    filtered_dict_list = [list(filter(lambda x: len(x)> 2,row)) for row in [row[5:] for row in datos]]
+    datos_dic = {}
+
+    #for row in filtered_dict_list
     return
 
 
