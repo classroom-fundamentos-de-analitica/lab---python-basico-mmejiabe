@@ -44,14 +44,18 @@ def pregunta_02():
     ]
 
     """
-    columna= list(datos[0])
-    set_1list = list(set(datos[0]))
-    set_1list.sort()
-    apariciones = []
-    for i in set_1list:
-        apariciones.append((i, columna.count(i)))
+    letras = []
+    R2 = []
 
-    return apariciones
+    with open('data.csv') as datos:
+        datos = csv.reader(datos, delimiter='	')
+        for i in datos:
+            letras.append(i[0])         
+    for j in set(letras):
+        R2.append((j, letras.count(j)))
+    R2.sort()
+
+    return R2
 
 
 def pregunta_03():
