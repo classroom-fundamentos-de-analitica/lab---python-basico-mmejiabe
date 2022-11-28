@@ -11,7 +11,9 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
-
+!pip install pandas 
+import pandas as pd
+datos = pd.read_csv ("data.csv",sep="\t", header=None)
 
 def pregunta_01():
     """
@@ -21,14 +23,10 @@ def pregunta_01():
     214
 
     """
-    import pandas as pd
-    datos = pd.read_csv ("data.csv",sep="\t", header=None)
+
     Resultado = datos[1].sum()
 
     return Resultado
-
-
-
 
 def pregunta_02():
     """
@@ -45,7 +43,14 @@ def pregunta_02():
     ]
 
     """
-    return
+    columna= list(datos[0])
+    set_1list = list(set(datos[0]))
+    set_1list.sort()
+    apariciones = []
+    for i in set_1list:
+        apariciones.append((i, columna.count(i)))
+
+    return apariciones
 
 
 def pregunta_03():
@@ -61,9 +66,23 @@ def pregunta_03():
         ("D", 31),
         ("E", 67),
     ]
-
+    
     """
-    return
+    letras=[]
+    conteo = []
+    suma=[]
+    with open('data.csv') as datos:
+        datos = csv.reader(datos, delimiter='	')
+        for i in datos:
+            if(not i[0] in letras):
+                letras.append(i[0])
+                conteo.append(int(i[1]))
+            else:
+                conteo[letras.index(i[0])]+=int(i[1])
+    for i in letras:
+        suma.append((i,conteo[letras.index(i)]))
+    suma.sort(reverse=False)
+    return suma
 
 
 def pregunta_04():
@@ -88,7 +107,17 @@ def pregunta_04():
     ]
 
     """
-    return
+    meses = []
+    with open('data.csv') as datos:
+        datos = csv.reader(datos, delimiter='	')
+        for i in datos:
+            mes = i[2].split("-")[1]
+            meses.append(mes)
+
+    apariciones = []
+    for mes in sorted(set(meses)):
+        apariciones.append((mes, meses.count(mes)))
+    return apariciones
 
 
 def pregunta_05():
@@ -106,7 +135,22 @@ def pregunta_05():
     ]
 
     """
-    return
+    letras = []
+    conteo = []
+
+    with open('data.csv') as csv_file:
+        datos = csv.reader(csv_file, delimiter='	')
+        for i in datos:
+            if not i[0] in letras:
+                letras.append(i[0])
+                conteo.append([int(i[1])])
+            else:
+                conteo[letras.index(i[0])].append(int(i[1]))
+    lista = []
+
+    for l in sorted(set(letras)):
+        lista.append((l, max(conteo[letras.index(l)]), min(conteo[letras.index(l)])))  
+    return lista
 
 
 def pregunta_06():
@@ -131,12 +175,27 @@ def pregunta_06():
     ]
 
     """
-    datos = [ line.split(",") for libe in data]
-    filtered_dict_list = [list(filter(lambda x: len(x)> 2,row)) for row in [row[5:] for row in datos]]
-    datos_dic = {}
+    cadenas = []
+    valores = []
+    with open('data.csv') as datos:
+        datos = csv.reader(datos, delimiter='	')
+        for i in datos:
+            dic = i[4].split(',')
 
-    #for row in filtered_dict_list
-    return
+            for j in dic: 
+                cadena = j.split(':')[0]
+                valor = j.split(':')[1]
+
+                if cadena not in cadenas:
+                    cadenas.append(cadena)
+                    valores.append([int(valor)])
+                else:
+                    valores[cadenas.index(cadena)].append(int(valor))
+    salida = []
+    for cadena in sorted(cadenas):
+        salida.append((cadena, min(valores[cadenas.index(cadena)]), max(valores[cadenas.index(cadena)])))
+
+    return salida
 
 
 def pregunta_07():
