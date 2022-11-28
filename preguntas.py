@@ -11,7 +11,7 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
-!pip install pandas 
+
 import pandas as pd
 datos = pd.read_csv ("data.csv",sep="\t", header=None)
 
