@@ -12,8 +12,7 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 """
 
-import pandas as pd
-datos = pd.read_csv ("data.csv",sep="\t", header=None)
+import csv
 
 def pregunta_01():
     """
@@ -23,10 +22,12 @@ def pregunta_01():
     214
 
     """
-
-    Resultado = datos[1].sum()
-
-    return Resultado
+    R1 = 0
+    with open('data.csv') as datos:
+        datos = csv.reader(datos, delimiter='	')
+        for fila in datos:
+            R1 += int(fila[1])
+    return R1
 
 def pregunta_02():
     """
