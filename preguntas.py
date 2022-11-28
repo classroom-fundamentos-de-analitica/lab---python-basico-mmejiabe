@@ -274,7 +274,7 @@ def pregunta_08():
                 letras[numeros.index(int(fila[1]))].add(fila[0])
     R8 = []
     for numero in sorted(numeros):
-        R8.append((numero, list(letras[numeros.index(numero)])))
+        R8.append((numero, list(sorted(letras[numeros.index(numero)]))))
     R8.sort()
     
     return R8
