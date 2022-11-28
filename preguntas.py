@@ -337,7 +337,16 @@ def pregunta_10():
 
 
     """
-    return
+    R10 = []
+
+    with open('data.csv') as datos:
+        datos = csv.reader(datos, delimiter='	')
+        for fila in datos:
+            col4 = len(fila[3].split(','))
+            col5 = len(fila[4].split(','))
+            R10.append((fila[0], col4, col5))
+        
+    return R10
 
 
 def pregunta_11():
@@ -358,7 +367,20 @@ def pregunta_11():
 
 
     """
-    return
+    letras = {}
+
+    with open('data.csv') as datos:
+        datos = csv.reader(atos, delimiter='	')
+        for fila in datos:
+            for letra in fila[3].split(','):
+                if not letra in letras.keys():
+                    letras[letra] = int(fila[1])
+                else:
+                    letras[letra] += int(fila[1])
+
+    R11 = dict(sorted(letras.items()))
+    
+    return R11
 
 
 def pregunta_12():
