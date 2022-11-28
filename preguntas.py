@@ -370,7 +370,7 @@ def pregunta_11():
     letras = {}
 
     with open('data.csv') as datos:
-        datos = csv.reader(atos, delimiter='	')
+        datos = csv.reader(datos, delimiter='	')
         for fila in datos:
             for letra in fila[3].split(','):
                 if not letra in letras.keys():
